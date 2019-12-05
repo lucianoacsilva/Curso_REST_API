@@ -4,8 +4,9 @@
   "description": "Curso de RESTful API com Node.js (API para uma lojinha)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },   
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lucianoacsilva/Curso_REST_API.git"
@@ -20,5 +21,11 @@
   "bugs": {
     "url": "https://github.com/lucianoacsilva/Curso_REST_API/issues"
   },
-  "homepage": "https://github.com/lucianoacsilva/Curso_REST_API#readme"
+  "homepage": "https://github.com/lucianoacsilva/Curso_REST_API#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.3.5",
+    "nodemon": "^2.0.1"
+  }
 }

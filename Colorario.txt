@@ -1,0 +1,13 @@
+#Aula 1
+
+Estudo de conceitos de RESTful API
+
+#Aula 2 
+
+Criacao de servidor e aplicacao que bate em cima dele;
+Envio de requisicao POST atraves do POSTMAN
+
+#Aula 3
+
+Estabelecimento de rotas da API; 
+Desafios para insercao, atualizacao, leitura e remocao de dados.
