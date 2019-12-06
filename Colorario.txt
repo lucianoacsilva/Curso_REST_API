@@ -11,3 +11,9 @@ Envio de requisicao POST atraves do POSTMAN
 
 Estabelecimento de rotas da API; 
 Desafios para insercao, atualizacao, leitura e remocao de dados.
+
+#Aula 4
+
+Tratamento de erros;
+nodemon;
+Log de requisicoes;

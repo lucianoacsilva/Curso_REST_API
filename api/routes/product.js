@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
+const password = process.env.MONGODB_PASSWORD
+
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://usuario:senhafacil@cluster0-atshr.mongodb.net/test?retryWrites=true&w=majority";
+const uri = "mongodb+srv://usuario:" + password + "@cluster0-atshr.mongodb.net/test?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
 var collection
