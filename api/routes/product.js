@@ -61,9 +61,31 @@ client.connect(err => {
 
 //Desafio!!!
 
-router.get('/', (req, res, next) => {
+router.delete('/deleteAll', (req, res, next) => {
 
-    collection.find({}).toArray((error, response) => {
+    collection.deleteMany({}, (error, response) => {
+        if(error) {
+            res.status(500).json({
+                message: error
+            });
+        }
+
+        else {
+            res.status(200).json({
+                message: response
+            });
+        }
+    });
+
+});
+
+router.get('/', (req, res, next) => {
+    const queryOpcional = req.query;
+    
+    if(req.query.preco != "") req.query.preco = parseInt(req.query.preco);
+    console.log(queryOpcional);
+
+    collection.find(queryOpcional).toArray((error, response) => {
         if(error) {
             res.status(500).json({
                 message: error
@@ -171,5 +193,7 @@ router.delete('/:nomeProduto', (req, res, next) => {
     });
 
 });
+
+
 
 module.exports = router;
