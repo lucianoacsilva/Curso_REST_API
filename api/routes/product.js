@@ -16,11 +16,11 @@ client.connect(err => {
 });
 
 
-router.get('/', (req, res, next) => {
-    res.status(200).json({
-        message: 'Trabalhando com GET requests para /products!!!'
-    });
-});
+// router.get('/', (req, res, next) => {
+//     res.status(200).json({
+//         message: 'Trabalhando com GET requests para /products!!!'
+//     });
+// });
 
 // router.post('/', (req, res, next) => {
 //     res.status(201).json({
@@ -45,11 +45,11 @@ router.get('/', (req, res, next) => {
     }
 }); */
 
-router.patch('/:idProduto', (req, res, next) => {
-    res.status(200).json({
-        message: "Produto atualizado!!"
-    });
-});
+// router.patch('/:idProduto', (req, res, next) => {
+//     res.status(200).json({
+//         message: "Produto atualizado!!"
+//     });
+// });
 
 // router.delete('/:idProduto', (req, res, next) => {
 //     res.status(200).json({
@@ -57,19 +57,47 @@ router.patch('/:idProduto', (req, res, next) => {
 //     });
 // });
 
+//-----------------------------------------------------------------
+
 //Desafio!!!
 
-router.get('/:nomeProduto', (req, res, next) => {
-    const nome = req.params.nomeProduto;
+router.get('/', (req, res, next) => {
 
-    for (p in bancoMock) {
-        if (bancoMock[p]["nome"] === nome) {
-            res.status(200).json(bancoMock[p]);
+    collection.find({}).toArray((error, response) => {
+        if(error) {
+            res.status(500).json({
+                message: error
+            });
         }
-    }
 
-    res.status(500).json({
-        message: "O registro nao existe na base!"
+        else {
+            res.status(200).json({
+                message: response
+            });
+        }
+    });
+
+});
+
+router.get('/:nomeProduto', (req, res, next) => {
+    const nomezinho = req.params.nomeProduto;
+
+    var query = { "nome": nomezinho };
+
+    console.log(query);
+
+    collection.find(query).toArray((error, response) => {
+        if(error) {
+            res.status(500).json({
+                message: error
+            });
+        }
+
+        else {
+            res.status(200).json({
+                message: response
+            });
+        }
     });
 });
 
@@ -94,28 +122,54 @@ router.post('/', (req, res, next) => {
     
 });
 
-router.patch('/:idProduto', (req, res, next) => {
-    res.status(200).json({
-        message: "Produto atualizado!!"
+router.patch('/:nomeProduto', (req, res, next) => {
+    const nomezinho = req.params.nomeProduto;
+    const precoNovo = req.body.preco;
+
+
+    var query = { "nome": nomezinho };
+    var novoValor = { $set: { "preco": precoNovo } };
+
+    console.log(query);
+    console.log(req.body);
+
+    collection.updateMany(query, novoValor, (error, response) => {
+        if(error) {
+            res.status(500).json({
+                message: error
+            });
+        }
+
+        else {
+            res.status(200).json({
+                message: response
+            });
+        }
     });
 });
 
 router.delete('/:nomeProduto', (req, res, next) => {
-    const nome = req.params.nomeProduto;
 
-    for (p in bancoMock) {
-        if (bancoMock[p]["nome"] === nome) {
-            bancoMock.splice(p, 1);
-            res.status(200).json({
-                message: "Produto deletado!!",
-                produtos: bancoMock
+    const nomezinho = req.params.nomeProduto;
+
+    var query = { "nome": nomezinho };
+
+    console.log(query);
+
+    collection.deleteMany(query, (error, response) => {
+        if(error) {
+            res.status(500).json({
+                message: error
             });
         }
-    }
 
-    res.status(500).json({
-        message: "O registro nao existe na base!"
+        else {
+            res.status(200).json({
+                message: response
+            });
+        }
     });
+
 });
 
 module.exports = router;
